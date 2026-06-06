@@ -2,6 +2,7 @@
 
 <template>
   <h1>Indie Index</h1>
+  <router-view />
 </template>
 
 <style>
