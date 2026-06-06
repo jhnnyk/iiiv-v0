@@ -13,11 +13,9 @@ async function handleLogin() {
   console.log(email.value, password.value)
 
   try {
-    const user = await auth.login(email.value, password.value)
-    if (user) {
-      console.log(email.value, ' logged in!')
-      router.push('/')
-    }
+    await auth.login(email.value, password.value)
+    console.log(email.value, ' logged in!')
+    router.push('/')
   } catch (error) {
     console.log(error)
   }
