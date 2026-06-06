@@ -1,8 +1,10 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
 
 const auth = useAuthStore()
+const router = useRouter()
 
 const email = ref('')
 const password = ref('')
@@ -11,7 +13,11 @@ async function handleLogin() {
   console.log(email.value, password.value)
 
   try {
-    await auth.login(email.value, password.value)
+    const user = await auth.login(email.value, password.value)
+    if (user) {
+      console.log(email.value, ' logged in!')
+      router.push('/')
+    }
   } catch (error) {
     console.log(error)
   }

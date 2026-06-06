@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+import TitleBar from './components/TitleBar.vue'
+</script>
 
 <template>
-  <h1>Indie Index</h1>
+  <TitleBar />
   <router-view />
 </template>
 
@@ -9,7 +11,7 @@
 body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-align: center;
-  padding: 200px;
+  padding: 10px 20px;
   background-color: rgb(11, 11, 11);
   color: rgb(203, 210, 216);
 }
