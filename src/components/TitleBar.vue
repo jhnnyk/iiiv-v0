@@ -17,8 +17,9 @@ async function handleLogout() {
 
 <template>
   <nav class="title-bar">
-    <h1>Indie Index</h1>
+    <h1><RouterLink to="/">Indie Index</RouterLink></h1>
     <div v-if="auth.user" class="user-info">
+      <button @click="router.push('/dashboard')">Dashboard</button>
       {{ auth.user.email }}
       <button @click="handleLogout">Log Out</button>
     </div>
