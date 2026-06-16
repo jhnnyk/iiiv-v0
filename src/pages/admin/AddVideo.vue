@@ -11,7 +11,7 @@ const embedCode = ref('')
 
 async function handleSubmit() {
   const id = await blockbuster.createVideo(title.value, embedCode.value)
-  if (id) router.push('/')
+  if (id) router.push('/dashboard')
 }
 </script>
 
