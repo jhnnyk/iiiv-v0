@@ -26,7 +26,7 @@ async function handleDelete(id) {
     <li>
       {{ video.title }}
       <small>by {{ video.authorEmail }}</small>
-      <!-- <button @click="router.push(`/videos/${video.id}/edit`)">edit</button>-->
+      <button @click="router.push(`/video/${video.id}/edit`)">edit</button>
       <button @click="handleDelete(video.id)">delete</button>
     </li>
   </ul>

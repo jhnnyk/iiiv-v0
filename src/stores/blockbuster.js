@@ -28,10 +28,19 @@ export const useBlockbuster = defineStore('blockbuster', () => {
       const q = query(collection(db, 'videos'), orderBy('createdAt', 'desc'))
       const snap = await getDocs(q)
       videos.value = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-    } catch (error) {
-      error.value = error.message
+    } catch (err) {
+      error.value = err.message
     } finally {
       loading.value = false
+    }
+  }
+
+  async function fetchVideo(id) {
+    try {
+      const snap = await getDoc(doc(db, 'videos', id))
+      return snap.exists() ? { id: snap.id, ...snap.data() } : null
+    } catch (err) {
+      error.value = err.message
     }
   }
 
@@ -39,7 +48,6 @@ export const useBlockbuster = defineStore('blockbuster', () => {
     const authStore = useAuthStore()
 
     if (!authStore.isLoggedIn) {
-      error.value = 'Must be logged in to add a video'
       throw new Error('Must be logged in to add a video')
     }
 
@@ -54,8 +62,27 @@ export const useBlockbuster = defineStore('blockbuster', () => {
       })
       await fetchVideos()
       return docRef.id
-    } catch (error) {
-      error.value = error.message
+    } catch (err) {
+      error.value = err.message
+    }
+  }
+
+  async function updateVideo(id, title, embedCode) {
+    const authStore = useAuthStore()
+    if (!authStore.isLoggedIn) {
+      throw new Error('Must be logged in to edit a video')
+    }
+
+    try {
+      await updateDoc(doc(db, 'videos', id), {
+        title,
+        embedCode,
+        updatedAt: serverTimestamp(),
+      })
+
+      await fetchVideos()
+    } catch (err) {
+      error.value = err.message
     }
   }
 
@@ -73,5 +100,5 @@ export const useBlockbuster = defineStore('blockbuster', () => {
     }
   }
 
-  return { videos, loading, error, fetchVideos, createVideo, deleteVideo }
+  return { videos, loading, error, fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo }
 })

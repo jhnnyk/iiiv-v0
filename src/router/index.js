@@ -6,6 +6,7 @@ import LoginPage from '@/pages/LoginPage.vue'
 import AddVideo from '@/pages/admin/AddVideo.vue'
 import DashBoard from '@/pages/admin/DashBoard.vue'
 import { watch } from 'vue'
+import EditVideo from '@/pages/admin/EditVideo.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +31,12 @@ const router = createRouter({
       path: '/video/create',
       name: 'add video',
       component: AddVideo,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/video/:id/edit',
+      name: 'edit video',
+      component: EditVideo,
       meta: { requiresAuth: true },
     },
   ],
