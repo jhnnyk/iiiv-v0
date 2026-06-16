@@ -15,4 +15,8 @@ body {
   background-color: rgb(11, 11, 11);
   color: rgb(203, 210, 216);
 }
+
+.error {
+  color: red;
+}
 </style>
