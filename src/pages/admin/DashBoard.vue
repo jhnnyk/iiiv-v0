@@ -10,9 +10,9 @@ const authStore = useAuthStore()
 
 onMounted(() => blockbuster.fetchVideos())
 
-// async function handleDelete(id) {
-//   if (confirm('Delete this video?')) await blockbuster.deleteVideo(id)
-// }
+async function handleDelete(id) {
+  if (confirm('Delete this video?')) await blockbuster.deleteVideo(id)
+}
 </script>
 
 <template>
@@ -26,8 +26,8 @@ onMounted(() => blockbuster.fetchVideos())
     <li>
       {{ video.title }}
       <small>by {{ video.authorEmail }}</small>
-      <!-- <button @click="router.push(`/videos/${video.id}/edit`)">edit</button>
-  <button @click="handleDelete(video.id)">delete</button> -->
+      <!-- <button @click="router.push(`/videos/${video.id}/edit`)">edit</button>-->
+      <button @click="handleDelete(video.id)">delete</button>
     </li>
   </ul>
 </template>

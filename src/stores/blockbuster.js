@@ -59,5 +59,19 @@ export const useBlockbuster = defineStore('blockbuster', () => {
     }
   }
 
-  return { videos, loading, error, fetchVideos, createVideo }
+  async function deleteVideo(id) {
+    const authStore = useAuthStore()
+    if (!authStore.isLoggedIn) {
+      throw new Error('Must be logged in to delete a video')
+    }
+
+    try {
+      await deleteDoc(doc(db, 'videos', id))
+      videos.value = videos.value.filter((v) => v.id !== id)
+    } catch (err) {
+      error.value = err.message
+    }
+  }
+
+  return { videos, loading, error, fetchVideos, createVideo, deleteVideo }
 })
