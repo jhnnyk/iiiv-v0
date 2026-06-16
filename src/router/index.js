@@ -24,11 +24,13 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: DashBoard,
+      meta: { requiresAuth: true },
     },
     {
       path: '/video/create',
       name: 'add video',
       component: AddVideo,
+      meta: { requiresAuth: true },
     },
   ],
 })
