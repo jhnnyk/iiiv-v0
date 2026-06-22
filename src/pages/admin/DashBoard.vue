@@ -13,6 +13,26 @@ onMounted(() => blockbuster.fetchVideos())
 async function handleDelete(id) {
   if (confirm('Delete this video?')) await blockbuster.deleteVideo(id)
 }
+
+const formatDate = (timestamp) => {
+  if (!timestamp) return '... loading ...'
+
+  const date = timestamp.toDate()
+
+  const dateStr = date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  })
+
+  const timeStr = date.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  })
+
+  return `${dateStr} ${timeStr.toLowerCase().replace(' ', '')}`
+}
 </script>
 
 <template>
@@ -40,7 +60,7 @@ async function handleDelete(id) {
             <!-- <span :class="['badge', video.status]">{{ video.status }}</span> -->
             <span class="badge published">published</span>
           </td>
-          <td>{{ video.updatedAt }}</td>
+          <td>{{ formatDate(video.updatedAt) }}</td>
           <td class="actions">
             <button @click="router.push(`/video/${video.id}/edit`)">edit</button>
             <button @click="handleDelete(video.id)">delete</button>
