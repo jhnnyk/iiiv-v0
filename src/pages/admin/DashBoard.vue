@@ -22,12 +22,105 @@ async function handleDelete(id) {
   <p v-if="blockbuster.loading">.... loading ....</p>
   <p v-else-if="!blockbuster.videos.length">No posts yet.</p>
 
-  <ul v-for="video in blockbuster.videos" :key="video.id">
-    <li>
-      {{ video.title }}
-      <small>by {{ video.authorEmail }}</small>
-      <button @click="router.push(`/video/${video.id}/edit`)">edit</button>
-      <button @click="handleDelete(video.id)">delete</button>
-    </li>
-  </ul>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Updated</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr v-for="video in blockbuster.videos" :key="video.id">
+          <td>{{ video.title }}</td>
+          <td>
+            <!-- <span :class="['badge', video.status]">{{ video.status }}</span> -->
+            <span class="badge published">published</span>
+          </td>
+          <td>{{ video.updatedAt }}</td>
+          <td class="actions">
+            <button @click="router.push(`/video/${video.id}/edit`)">edit</button>
+            <button @click="handleDelete(video.id)">delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
+
+<style scoped>
+.table-wrapper {
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #1c1c1c;
+}
+
+thead tr {
+  background: #161616;
+}
+
+th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+tbody tr {
+  background: #1c1c1c;
+}
+
+tbody tr:nth-child(even) {
+  background: #232323;
+}
+
+tbody tr:hover {
+  background: #2a2a2a;
+}
+
+td {
+  padding: 10px 14px;
+  color: #e5e7eb;
+  border-top: 1px solid #2a2a2a;
+}
+
+.muted {
+  color: #9ca3af;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.badge.published {
+  background: #14321f;
+  color: #4ade80;
+}
+
+.badge.draft {
+  background: #3a2a0e;
+  color: #fbbf24;
+}
+
+.actions i {
+  cursor: pointer;
+  color: #9ca3af;
+}
+
+.actions i:hover {
+  color: #e5e7eb;
+}
+</style>
