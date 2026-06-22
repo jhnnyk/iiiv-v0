@@ -3,6 +3,7 @@ import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useBlockbuster } from '@/stores/blockbuster'
 import { useAuthStore } from '@/stores/auth'
+import { IconEdit, IconTrash } from '@tabler/icons-vue'
 
 const router = useRouter()
 const blockbuster = useBlockbuster()
@@ -62,8 +63,8 @@ const formatDate = (timestamp) => {
           </td>
           <td>{{ formatDate(video.updatedAt) }}</td>
           <td class="actions">
-            <button @click="router.push(`/video/${video.id}/edit`)">edit</button>
-            <button @click="handleDelete(video.id)">delete</button>
+            <IconEdit @click="router.push(`/video/${video.id}/edit`)" />
+            <IconTrash @click="handleDelete(video.id)" />
           </td>
         </tr>
       </tbody>
@@ -90,11 +91,11 @@ thead tr {
 }
 
 th {
-  text-align: left;
   padding: 10px 14px;
   font-size: 13px;
   color: #9ca3af;
   font-weight: 400;
+  text-align: left;
 }
 
 tbody tr {
@@ -113,6 +114,11 @@ td {
   padding: 10px 14px;
   color: #e5e7eb;
   border-top: 1px solid #2a2a2a;
+  text-align: left;
+}
+
+td.actions {
+  text-align: right;
 }
 
 .muted {
@@ -135,12 +141,13 @@ td {
   color: #fbbf24;
 }
 
-.actions i {
+.actions .tabler-icon {
   cursor: pointer;
   color: #9ca3af;
+  padding-left: 10px;
 }
 
-.actions i:hover {
+.actions .tabler-icon:hover {
   color: #e5e7eb;
 }
 </style>
