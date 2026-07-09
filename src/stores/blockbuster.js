@@ -44,8 +44,9 @@ export const useBlockbuster = defineStore('blockbuster', () => {
     }
   }
 
-  async function createVideo(title, embedCode) {
+  async function createVideo(formData) {
     const authStore = useAuthStore()
+    const { thumbnail, ...videoData } = formData
 
     if (!authStore.isLoggedIn) {
       throw new Error('Must be logged in to add a video')
@@ -53,8 +54,7 @@ export const useBlockbuster = defineStore('blockbuster', () => {
 
     try {
       const docRef = await addDoc(collection(db, 'videos'), {
-        title,
-        embedCode,
+        ...videoData,
         authorId: authStore.user.uid,
         authorEmail: authStore.user.email,
         createdAt: serverTimestamp(),
@@ -67,16 +67,17 @@ export const useBlockbuster = defineStore('blockbuster', () => {
     }
   }
 
-  async function updateVideo(id, title, embedCode) {
+  async function updateVideo(id, formData) {
     const authStore = useAuthStore()
+    const { thumbnail, ...videoData } = formData
+
     if (!authStore.isLoggedIn) {
       throw new Error('Must be logged in to edit a video')
     }
 
     try {
       await updateDoc(doc(db, 'videos', id), {
-        title,
-        embedCode,
+        ...videoData,
         updatedAt: serverTimestamp(),
       })
 

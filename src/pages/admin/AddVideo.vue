@@ -1,26 +1,20 @@
 <script setup>
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useBlockbuster } from '@/stores/blockbuster'
+import VideoForm from '@/components/VideoForm.vue'
 
 const router = useRouter()
 const blockbuster = useBlockbuster()
 
-const title = ref('')
-const embedCode = ref('')
-
-async function handleSubmit() {
-  const id = await blockbuster.createVideo(title.value, embedCode.value)
-  if (id) router.push('/dashboard')
+async function handleSubmit(formData) {
+  await blockbuster.createVideo(formData)
+  if (!blockbuster.error) router.push('/dashboard')
 }
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit">
-    <h1>New Video</h1>
-    <input v-model="title" placeholder="Title" required />
-    <textarea v-model="embedCode" placeholder="... embed code ..." />
-    <p v-if="blockbuster.error" class="error">{{ blockbuster.error }}</p>
-    <button type="submit">Add Video</button>
-  </form>
+  <div class="form-wrapper">
+    <VideoForm :loading="blockbuster.loading" @submit="handleSubmit" />
+    <p v-if="blockbuster.error">{{ blockbuster.error }}</p>
+  </div>
 </template>
