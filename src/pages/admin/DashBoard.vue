@@ -61,7 +61,7 @@ const formatDate = (timestamp) => {
           <td>{{ video.title }}</td>
           <td>
             <!-- <span :class="['badge', video.status]">{{ video.status }}</span> -->
-            <span class="badge published">published</span>
+            <span :class="video.status" class="badge">{{ video.status }}</span>
           </td>
           <td>{{ formatDate(video.updatedAt) }}</td>
           <td class="actions">
