@@ -127,7 +127,7 @@ function handleSubmit() {
       <div class="form-actions">
         <button type="button" class="btn-ghost" @click="router.push('/dashboard')">Cancel</button>
         <button type="submit" class="btn-primary" :disabled="blockbuster.loading">
-          {{ blockbuster.loading ? 'Saving...' : 'Publish' }}
+          {{ blockbuster.loading ? 'Saving...' : 'Save' }}
         </button>
       </div>
     </form>
