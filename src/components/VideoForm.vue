@@ -1,4 +1,5 @@
 <script setup>
+import DOMPurify from 'dompurify'
 import { defineEmits, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useBlockbuster } from '@/stores/blockbuster'
@@ -46,7 +47,10 @@ function handleFileChange(e) {
 function handleSubmit() {
   emit('submit', {
     title: title.value,
-    embedCode: embedCode.value,
+    embedCode: DOMPurify.sanitize(embedCode.value, {
+      ADD_TAGS: ['iframe'],
+      ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'src'],
+    }),
     status: status.value,
     publishDate: publishDate.value,
     genres: genres.value,
