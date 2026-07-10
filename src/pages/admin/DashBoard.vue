@@ -38,7 +38,9 @@ const formatDate = (timestamp) => {
 
 <template>
   <h1>Dashboard</h1>
-  <button v-if="authStore.isLoggedIn" @click="router.push('/video/create')">New video</button>
+  <button v-if="authStore.isLoggedIn" @click="router.push('/video/create')" class="btn-primary">
+    New video
+  </button>
 
   <p v-if="blockbuster.loading">.... loading ....</p>
   <p v-else-if="!blockbuster.videos.length">No posts yet.</p>
@@ -72,11 +74,12 @@ const formatDate = (timestamp) => {
   </div>
 </template>
 
-<style scoped>
+<style>
 .table-wrapper {
   border: 1px solid #2a2a2a;
   border-radius: 12px;
   overflow: hidden;
+  margin-top: 14px;
 }
 
 table {

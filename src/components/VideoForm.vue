@@ -134,7 +134,7 @@ function handleSubmit() {
   </div>
 </template>
 
-<style scoped>
+<style>
 .form-wrapper {
   max-width: 680px;
   margin: 2rem auto;
@@ -213,5 +213,129 @@ input[type='file'] {
   color: #9ca3af;
   font-size: 13px;
   padding: 8px 12px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #e5e7eb;
+  margin-bottom: 6px;
+}
+
+.check-row input {
+  accent-color: #6b7280;
+  width: 15px;
+  height: 15px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #2a2a2a;
+  margin: 1.25rem 0;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toggle-label {
+  font-size: 14px;
+  color: #e5e7eb;
+}
+
+.toggle {
+  position: relative;
+  width: 36px;
+  height: 20px;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider-track {
+  position: absolute;
+  inset: 0;
+  background: #2a2a2a;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.toggle input:checked + .slider-track {
+  background: #4b5563;
+}
+
+.slider-track:before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 3px;
+  top: 3px;
+  background: #9ca3af;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.toggle input:checked + .slider-track:before {
+  transform: translateX(16px);
+  background: #e5e7eb;
+}
+
+.error {
+  font-size: 13px;
+  color: #f87171;
+  margin: 0 0 1rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.btn-ghost,
+.btn-primary {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid #2a2a2a;
+  color: #9ca3af;
+}
+
+.btn-primary {
+  background: #374151;
+  color: #e5e7eb;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>
